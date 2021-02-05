@@ -64,7 +64,7 @@
     <div class="card-panel recipe white row" id="spieler2">
       <img src="img/s.png" alt="recipe thumb" onclick="gelegt(this)">
       <div class="recipe-details">
-        <div class="recipe-title" contenteditable = "true" id="spieler2-name">Uli</div>
+        <div class="recipe-title" contenteditable = "true" id="spieler2-name">Daniel</div>
         <div class="recipe-ingredients"></div>
       </div>
       <div class="recipe-gesamt" id="spieler2-betrag">0</div>
@@ -86,7 +86,7 @@
     <div class="card-panel recipe white row" id="spieler4">
       <img src="img/s.png" alt="recipe thumb" onclick="gelegt(this)">
       <div class="recipe-details">
-        <div class="recipe-title" contenteditable = "true" id="spieler4-name">Jessy</div>
+        <div class="recipe-title" contenteditable = "true" id="spieler4-name">Patrik</div>
         <div class="recipe-ingredients"></div>
       </div>
       <div class="recipe-gesamt" id="spieler4-betrag">0</div>
@@ -326,7 +326,7 @@ if (Math.sign(spieler4GesamtGewinn) === -1) {
     };
 
     if (sessionStorage.getItem("spieler2-name") === null) {
-      sessionStorage.setItem("spieler2-name", "Uli");
+      sessionStorage.setItem("spieler2-name", "Daniel");
     }
     document.getElementById("spieler2-name").innerHTML = sessionStorage.getItem("spieler2-name");
     document.getElementById("spieler2-name-eintragen").innerHTML = sessionStorage.getItem("spieler2-name");
@@ -346,7 +346,7 @@ if (Math.sign(spieler4GesamtGewinn) === -1) {
     };
 
     if (sessionStorage.getItem("spieler4-name") === null) {
-      sessionStorage.setItem("spieler4-name", "Jessy");
+      sessionStorage.setItem("spieler4-name", "Patrik");
     }
     document.getElementById("spieler4-name").innerHTML = sessionStorage.getItem("spieler4-name");
     document.getElementById("spieler4-name-eintragen").innerHTML = sessionStorage.getItem("spieler4-name");

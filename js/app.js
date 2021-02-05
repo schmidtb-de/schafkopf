@@ -9,11 +9,11 @@ let spielObject = {}
 let spielArray = []
 let spieler1 = "Sebastian"
 let spieler1GesamtGewinn = 0
-let spieler2 = "Ulrike"
+let spieler2 = "Daniel"
 let spieler2GesamtGewinn = 0
 let spieler3 = "Benny"
 let spieler3GesamtGewinn = 0
-let spieler4 = "Jessica"
+let spieler4 = "Patrik"
 let spieler4GesamtGewinn = 0
 
 /* document
@@ -659,7 +659,8 @@ document
       return `${spieler1}: ${spieler1GesamtGewinn}, 
       ${spieler2}: ${spieler2GesamtGewinn}, 
       ${spieler3}: ${spieler3GesamtGewinn}, 
-      ${spieler4}: ${spieler4GesamtGewinn}`
+      ${spieler4}: ${spieler4GesamtGewinn} ///////////// -->
+      ${JSON.stringify(localStorage)}`
     }
   })
 

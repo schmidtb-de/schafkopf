@@ -1,0 +1,119 @@
+/* colours */
+:root {
+  --primary: #ffe9d2;
+  --secondary: #ffe1c4;
+  --title: #ff8816;
+  --negativ: #ff8816;
+}
+
+/* layout styles */
+nav {
+  background: var(--primary);
+  border-bottom: 10px solid var(--secondary);
+}
+nav a {
+  text-transform: uppercase;
+  color: var(--title);
+}
+nav a span {
+  font-weight: bold;
+}
+nav .sidenav-trigger {
+  margin: 0;
+}
+
+/* recipe styles */
+.recipes {
+  margin-top: 20px;
+}
+.card-panel.recipe {
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0px 1px 3px rgba(90, 90, 90, 0.1);
+  display: grid;
+  grid-template-columns: 2fr 4fr 2fr 2fr;
+  grid-template-areas: "image details gesamt delete";
+  position: relative;
+}
+.recipe img {
+  grid-area: image;
+  max-width: 60px;
+  /* border-radius: 100%; */
+}
+.recipe-details {
+  grid-area: details;
+  margin-top: 6px;
+  margin-left: 6px;
+}
+.recipe-gesamt {
+  grid-area: gesamt;
+  font-size: 3em;
+}
+.recipe-delete {
+  grid-area: delete;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+.recipe-delete i {
+  font-size: 18px;
+}
+.recipe-delete img {
+  max-width: 30px;
+  /* transform: rotate(90deg); */
+  /* background-color: turquoise;  */
+}
+#spieler1-mischen {
+  max-width: 22px;
+}
+.recipe-title {
+  font-weight: bold;
+  font-size: 1.5em;
+}
+.recipe-ingredients {
+  font-size: 0.8em;
+}
+
+/* form-styles */
+.add-btn {
+  background: var(--title) !important;
+}
+input {
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+}
+.side-form button {
+  background: var(--title);
+  box-shadow: 1px 1px 3px rgba(90, 90, 90, 0.2);
+}
+form .input-field {
+  margin-top: 30px;
+}
+.switch {
+  margin-top: 30px;
+}
+.switch label {
+  font-size: 2em;
+}
+.btn-large {
+  font-size: 20px;
+}
+/* .side-form .row {
+  margin-bottom: 0;
+}
+
+.input-field.center {
+  margin-top: 0;
+}
+ */
+/* gesamt-styles */
+.negativ {
+  color: var(--negativ);
+}
+
+#spieler1-betrag,
+#spieler2-betrag,
+#spieler3-betrag,
+#spieler4-betrag {
+  text-align: right;
+}

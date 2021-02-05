@@ -1,0 +1,384 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=no"">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Schapfkopf Kumpel</title>
+  <link type="text/css" href="css/dragula.css" rel="stylesheet">
+  <!-- materialize icons, css & js -->
+  <link type="text/css" href="css/materialize.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" href="css/styles.css" rel="stylesheet">
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+  <link rel="manifest" href="manifest.json">
+  <!-- ios support -->
+  <link rel="apple-touch-icon" sizes="180x180" href="img/icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="img/icons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="img/icons/favicon-16x16.png">
+  <meta name="apple-mobile-web-app-status-bar" content="#FFE1C4">
+  <meta name="theme-color" content="#FFE1C4">
+  <link type="text/css" href="css/w3.css" rel="stylesheet">
+</head>
+<body class="grey lighten-4">
+
+  <!-- top nav -->
+  <nav class="z-depth-0">
+    <div class="nav-wrapper container">
+      <a href="/">Schafkopf<span>Kumpel </span></a>
+      <span class="right grey-text text-darken-1">
+        <i class="material-icons sidenav-trigger" data-target="side-menu">view_list</i>
+      </span>
+    </div>
+  </nav>
+
+  <!-- side nav -->
+  <div class="sidenav side-menu" id="side-menu">
+         <table class="striped centered">
+          <thead>
+             <tr>
+                <th></th>
+                <th id="spieler1-anfangsbuchstabe"></th>
+                <th id="spieler2-anfangsbuchstabe"></th>
+                <th id="spieler3-anfangsbuchstabe"></th>
+                <th id="spieler4-anfangsbuchstabe"></th>
+             </tr>
+          </thead>
+          <tbody id="spiele-liste">
+         </tbody>
+      </table>
+  </div>
+
+  <!-- recipes -->
+  <div class="recipes container grey-text text-darken-1"> <!-- id="drag-container"-->
+    <div class="card-panel recipe white row" id="spieler1">
+      <img src="img/s.png" alt="recipe thumb" onclick="gelegt(this)">
+      <div class="recipe-details">
+        <div class="recipe-title" contenteditable = "true" id="spieler1-name">Sepp</div>
+        <div class="recipe-ingredients"></div>
+      </div>
+      <div class="recipe-gesamt" id="spieler1-betrag">0</div>
+      <div class="recipe-delete">
+        <img src="" id="spieler1-mischen" class="w3-animate-zoom">
+      </div>
+    </div>
+    <div class="card-panel recipe white row" id="spieler2">
+      <img src="img/s.png" alt="recipe thumb" onclick="gelegt(this)">
+      <div class="recipe-details">
+        <div class="recipe-title" contenteditable = "true" id="spieler2-name">Uli</div>
+        <div class="recipe-ingredients"></div>
+      </div>
+      <div class="recipe-gesamt" id="spieler2-betrag">0</div>
+      <div class="recipe-delete">
+        <img src="" id="spieler2-mischen" class="w3-animate-zoom">
+      </div>
+    </div>
+    <div class="card-panel recipe white row" id="spieler3">
+      <img src="img/s.png" alt="recipe thumb" onclick="gelegt(this)">
+      <div class="recipe-details">
+        <div class="recipe-title" contenteditable = "true" id="spieler3-name">Benny</div>
+        <div class="recipe-ingredients"></div>
+      </div>
+      <div class="recipe-gesamt" id="spieler3-betrag">0</div>
+      <div class="recipe-delete">
+        <img src="" id="spieler3-mischen" class="w3-animate-zoom">
+      </div>
+    </div>
+    <div class="card-panel recipe white row" id="spieler4">
+      <img src="img/s.png" alt="recipe thumb" onclick="gelegt(this)">
+      <div class="recipe-details">
+        <div class="recipe-title" contenteditable = "true" id="spieler4-name">Jessy</div>
+        <div class="recipe-ingredients"></div>
+      </div>
+      <div class="recipe-gesamt" id="spieler4-betrag">0</div>
+      <div class="recipe-delete">
+        <img src="" id="spieler4-mischen" class="w3-animate-zoom">
+      </div>
+    </div>
+  </div>
+
+  <div class="center">
+    <a class="btn-floating btn-large add-btn sidenav-trigger" data-target="side-form" id="longpress" data-long-press-delay="200">
+      <i class="material-icons" id="longpress" data-long-press-delay="500">add</i>
+    </a>
+  </div>
+
+  <!-- add recipe side nav -->
+  <div id="side-form" class="sidenav side-form" onchange="spielEintragenAktualisieren()">
+    <form class="add-recipe container section">
+         <!-- Switch -->
+        <div class="switch">
+          <label>
+            Sauspiel
+            <input type="checkbox" data-name="spielart" onchange="checkbox(this)">
+            <span class="lever"></span>
+            Solo
+          </label>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Spielart-->
+        <div class="row">
+        <p class="col s6">
+          <label>
+            <input id="indeterminate-checkbox" type="checkbox" onchange="checkbox(this)" data-name="schneider" />
+            <span>Schneider</span>
+          </label>
+        </p>
+      <p class="col s6">
+        <label>
+          <input id="indeterminate-checkbox" type="checkbox" onchange="checkbox(this)" data-name="schwarz" />
+          <span>Schwarz</span>
+        </label>
+      </p>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Kontra & Re -->
+        <div class="row">
+        <p class="col s6">
+          <label>
+            <input id="indeterminate-checkbox" type="checkbox" data-name="kontra" />
+            <span>Kontra</span>
+          </label>
+        </p>
+      <p class="col s6">
+        <label>
+          <input id="indeterminate-checkbox" type="checkbox" data-name="re" />
+          <span>Re</span>
+        </label>
+      </p>
+        </div>
+
+        <div class="divider"></div>
+
+        <!-- Spieler -->
+        <div class="row">
+          <p class="col s6">
+            <label>
+              <input type="checkbox" onchange="checkbox(this)" name="spieler" data-name="spieler1" />
+              <span id="spieler1-name-eintragen"></span>
+            </label>
+          </p>
+        <p class="col s6">
+          <label>
+            <input type="checkbox" onchange="checkbox(this)" name="spieler" data-name="spieler2"/>
+            <span id="spieler2-name-eintragen"></span>
+          </label>
+        </p>
+        <p class="col s6">
+          <label>
+            <input type="checkbox" onchange="checkbox(this)" name="spieler" data-name="spieler3" />
+            <span id="spieler3-name-eintragen"></span>
+          </label>
+        </p>
+      <p class="col s6">
+        <label>
+          <input type="checkbox" onchange="checkbox(this)" name="spieler" data-name="spieler4" />
+          <span id="spieler4-name-eintragen"></span>
+        </label>
+      </p>
+          </div>
+        <!-- <div class="divider"></div> -->
+        <div class="row">
+          <div class="switch col s8">
+            <label>
+              G
+              <input type="checkbox" data-name="gewinnerVerlierer" onchange="checkbox(this)">
+              <span class="lever"></span>
+              V
+            </label>
+          </div>
+        <div class="input-field col s4">
+          <select onchange="M.FormSelect.init(this)">
+            <option value="0" selected>keine</option>
+            <option value="20" disabled="true">2</option>
+            <option value="30">3</option>
+            <option value="40">4</option>
+            <option value="50">5</option>
+            <option value="60">6</option>
+            <option value="70">7</option>
+            <option value="80">8</option>
+          </select>
+          <label>Laufende</label>
+        </div>
+        </div>
+      <div class="input-field center">
+        <p id="anzeige-gelegt">0 mal gelegt</p>
+        <button class="btn-large" id="spielEintragen" onclick="spielEintragenStorage()">10</button>
+      </div>
+      <div class="row">
+        <div class="input-field center">
+          <button class="btn-small" id="longpress-deleteall" data-long-press-delay="500">
+            <i class="material-icons" id="longpress-deleteall" data-long-press-delay="5000">delete_forever</i>
+          </button>
+          <button class="btn-small" onclick="letztesSpielLöschen()">
+            <i class="material-icons">delete</i>
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script src="js/ui.js"></script>
+  <script src="js/app.js"></script>
+  <script src='js/dragula.min.js'></script>
+  <script src="js/long-press-event.min.js"></script>
+  <script>
+    dragula([document.querySelector('#drag-container')]);
+    function spielEintragenAktualisieren() {
+      document.getElementById("spielEintragen").innerHTML=gesamtGewinn();
+    }
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+  var elems = document.querySelectorAll("select");
+  var instances = M.FormSelect.init(elems);
+});
+  </script>
+  <script>
+/*     let localStorageTest = JSON.parse(localStorage.getItem("1"))
+    let spieler1GesamtGewinn = {...localStorage}
+    console.log(spieler1GesamtGewinn)
+    document.getElementById("spieler1-betrag").innerHTML = localStorageTest.spieler1; */
+    // iterate localStorage
+for (var i = 0; i < localStorage.length; i++) {
+
+// set iteration key name
+var key = localStorage.key(i);
+
+// use key name to retrieve the corresponding value
+var value1 = JSON.parse(localStorage.getItem(key)).spieler1;
+var value2 = JSON.parse(localStorage.getItem(key)).spieler2;
+var value3 = JSON.parse(localStorage.getItem(key)).spieler3;
+var value4 = JSON.parse(localStorage.getItem(key)).spieler4;
+
+spieler1GesamtGewinn = spieler1GesamtGewinn + value1
+spieler2GesamtGewinn = spieler2GesamtGewinn + value2
+spieler3GesamtGewinn = spieler3GesamtGewinn + value3
+spieler4GesamtGewinn = spieler4GesamtGewinn + value4
+
+// console.log the iteration key and value
+/* console.log("Spieler1 Gesamtgewinn: " + spieler1GesamtGewinn);
+console.log("Spieler2 Gesamtgewinn: " + spieler2GesamtGewinn); */
+
+if (Math.sign(spieler1GesamtGewinn) === -1) {
+  document.getElementById("spieler1-betrag").innerHTML = spieler1GesamtGewinn.toString().slice(1, 6);
+  document.getElementById("spieler1-betrag").classList.add("negativ")
+} else {
+  document.getElementById("spieler1-betrag").innerHTML = spieler1GesamtGewinn
+  document.getElementById("spieler1-betrag").classList.remove("negativ")
+}
+
+if (Math.sign(spieler2GesamtGewinn) === -1) {
+  document.getElementById("spieler2-betrag").innerHTML = spieler2GesamtGewinn.toString().slice(1, 6);
+  document.getElementById("spieler2-betrag").classList.add("negativ")
+} else {
+  document.getElementById("spieler2-betrag").innerHTML = spieler2GesamtGewinn
+  document.getElementById("spieler2-betrag").classList.remove("negativ")
+}
+
+if (Math.sign(spieler3GesamtGewinn) === -1) {
+  document.getElementById("spieler3-betrag").innerHTML = spieler3GesamtGewinn.toString().slice(1, 6);
+  document.getElementById("spieler3-betrag").classList.add("negativ")
+} else {
+  document.getElementById("spieler3-betrag").innerHTML = spieler3GesamtGewinn
+  document.getElementById("spieler3-betrag").classList.remove("negativ")
+}
+
+if (Math.sign(spieler4GesamtGewinn) === -1) {
+  document.getElementById("spieler4-betrag").innerHTML = spieler4GesamtGewinn.toString().slice(1, 6);
+  document.getElementById("spieler4-betrag").classList.add("negativ")
+} else {
+  document.getElementById("spieler4-betrag").innerHTML = spieler4GesamtGewinn
+  document.getElementById("spieler4-betrag").classList.remove("negativ")
+}
+
+//document.getElementById("spieler1-betrag").innerHTML = spieler1GesamtGewinn;
+//document.getElementById("spieler2-betrag").innerHTML = spieler2GesamtGewinn;  
+//document.getElementById("spieler3-betrag").innerHTML = spieler3GesamtGewinn;  
+//document.getElementById("spieler4-betrag").innerHTML = spieler4GesamtGewinn; 
+}
+  </script>
+  <script>
+    spieleListeErstellen();
+  </script>
+  <script>
+    mussMischen();
+  </script>
+  <script>
+    // Letztes Spiel Unter Spielernamen anzeigen
+    document.getElementsByClassName("recipe-ingredients")[0].innerHTML = JSON.parse(localStorage.getItem(localStorage.length)).spieler1
+    document.getElementsByClassName("recipe-ingredients")[1].innerHTML = JSON.parse(localStorage.getItem(localStorage.length)).spieler2
+    document.getElementsByClassName("recipe-ingredients")[2].innerHTML = JSON.parse(localStorage.getItem(localStorage.length)).spieler3
+    document.getElementsByClassName("recipe-ingredients")[3].innerHTML = JSON.parse(localStorage.getItem(localStorage.length)).spieler4
+  </script>
+  <script>
+    if (sessionStorage.getItem("spieler1-name") === null) {
+      sessionStorage.setItem("spieler1-name", "Sepp");
+    }
+    document.getElementById("spieler1-name").innerHTML = sessionStorage.getItem("spieler1-name");
+    document.getElementById("spieler1-name-eintragen").innerHTML = sessionStorage.getItem("spieler1-name");
+    document.getElementById("spieler1-anfangsbuchstabe").innerHTML = sessionStorage.getItem("spieler1-name").slice(0, 1);
+    document.getElementById("spieler1-name").oninput = () => {
+      sessionStorage.setItem("spieler1-name", document.getElementById("spieler1-name").innerHTML)
+    };
+
+    if (sessionStorage.getItem("spieler2-name") === null) {
+      sessionStorage.setItem("spieler2-name", "Uli");
+    }
+    document.getElementById("spieler2-name").innerHTML = sessionStorage.getItem("spieler2-name");
+    document.getElementById("spieler2-name-eintragen").innerHTML = sessionStorage.getItem("spieler2-name");
+    document.getElementById("spieler2-anfangsbuchstabe").innerHTML = sessionStorage.getItem("spieler2-name").slice(0, 1);
+    document.getElementById("spieler2-name").oninput = () => {
+      sessionStorage.setItem("spieler2-name", document.getElementById("spieler2-name").innerHTML)
+    };
+
+    if (sessionStorage.getItem("spieler3-name") === null) {
+      sessionStorage.setItem("spieler3-name", "Benny");
+    }
+    document.getElementById("spieler3-name").innerHTML = sessionStorage.getItem("spieler3-name");
+    document.getElementById("spieler3-name-eintragen").innerHTML = sessionStorage.getItem("spieler3-name");
+    document.getElementById("spieler3-anfangsbuchstabe").innerHTML = sessionStorage.getItem("spieler3-name").slice(0, 1);
+    document.getElementById("spieler3-name").oninput = () => {
+      sessionStorage.setItem("spieler3-name", document.getElementById("spieler3-name").innerHTML)
+    };
+
+    if (sessionStorage.getItem("spieler4-name") === null) {
+      sessionStorage.setItem("spieler4-name", "Jessy");
+    }
+    document.getElementById("spieler4-name").innerHTML = sessionStorage.getItem("spieler4-name");
+    document.getElementById("spieler4-name-eintragen").innerHTML = sessionStorage.getItem("spieler4-name");
+    document.getElementById("spieler4-anfangsbuchstabe").innerHTML = sessionStorage.getItem("spieler4-name").slice(0, 1);
+    document.getElementById("spieler4-name").oninput = () => {
+      sessionStorage.setItem("spieler4-name", document.getElementById("spieler4-name").innerHTML)
+    };
+  </script>
+  <script>
+let preloadImageWolf = new Image();
+let preloadImageSheep = new Image();
+
+function preload() {
+  preloadImageWolf.src = 'img/w.png';
+  preloadImageSheep.src = 'img/s.png';
+}
+preload();
+  </script>
+<script>
+  let toastHTML = `<div class='valign-wrapper'><i class='material-icons'>info_outline</i>&ensp;Es wurden bereits ${localStorage.length} Spiele gespielt!</div>`
+  if (localStorage.length === 20 ||
+  localStorage.length === 40 ||
+  localStorage.length === 60 ||
+  localStorage.length === 80 ||
+  localStorage.length === 100 ||
+  localStorage.length === 120 ||
+  localStorage.length === 140 ||
+  localStorage.length === 160 ||
+  localStorage.length === 180 ||
+  localStorage.length === 200
+  )
+  M.toast({html: toastHTML, displayLength: 5000});
+</script>
+</body>
+</html>

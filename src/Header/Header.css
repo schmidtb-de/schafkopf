@@ -1,0 +1,21 @@
+:root {
+  --primary: #ffe9d2;
+  --secondary: #ffe1c4;
+  --title: #ff8816;
+}
+
+nav {
+  background: var(--primary);
+  border-bottom: 10px solid var(--secondary);
+}
+nav a {
+  text-transform: uppercase;
+  color: var(--title);
+}
+nav a span {
+  font-weight: bold;
+}
+nav .sidenav-trigger {
+  margin: 0;
+  cursor: pointer;
+}

@@ -1,0 +1,45 @@
+/* colours */
+:root {
+  --primary: #ffe9d2;
+  --secondary: #ffe1c4;
+  --title: #ff8816;
+  --negativ: #ff8816;
+}
+
+#spieler1-mischen {
+  max-width: 22px;
+}
+
+/* form-styles */
+input {
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+}
+.side-form button {
+  background: var(--title);
+  box-shadow: 1px 1px 3px rgba(90, 90, 90, 0.2);
+}
+form .input-field {
+  margin-top: 30px;
+}
+.switch {
+  margin-top: 30px;
+}
+.switch label {
+  font-size: 2em;
+}
+.btn-large {
+  font-size: 20px;
+}
+
+/* gesamt-styles */
+.negativ {
+  color: var(--negativ);
+}
+
+#spieler1-betrag,
+#spieler2-betrag,
+#spieler3-betrag,
+#spieler4-betrag {
+  text-align: right;
+}

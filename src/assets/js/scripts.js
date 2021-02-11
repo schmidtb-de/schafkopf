@@ -1,3 +1,5 @@
+import M from "materialize-css"
+
 let grundspiel = 10
 let solo = 50
 let schneider = 10
@@ -29,7 +31,7 @@ if ("serviceWorker" in navigator) {
     .catch((err) => console.log("service worker not registered", err))
 }
 
-function checkbox(checkbox) {
+export function checkbox(checkbox) {
   let checkName = checkbox.dataset.name
 
   // Wenn Spielart gewählt wird alle Häkchen bei den Spielern entfernen und Chechkboxen wieder aktivieren
@@ -436,7 +438,7 @@ function checkbox(checkbox) {
   }
 }
 
-function gesamtGewinn() {
+export function gesamtGewinn() {
   // ++++++++++++ Sauspiel oder Ramsch
   if (!document.querySelector('[data-name="spielart"]').checked) {
     document.querySelectorAll("select")[0][1].disabled = true
@@ -554,6 +556,7 @@ function gesamtGewinn() {
         break
       case 4:
         gewinn = gewinn * 2 * 2 * 2 * 2
+        break
       default:
         gewinn = gewinn
     }
@@ -563,7 +566,7 @@ function gesamtGewinn() {
 }
 
 // Wenn gelegt wird, Bilder tauschen
-function gelegt(spieler_gelegt) {
+export function gelegt(spieler_gelegt) {
   if (spieler_gelegt.src.slice(-5) === "s.png") {
     spieler_gelegt.src = "img/w.png"
     anzahlGelegt = anzahlGelegt + 1
@@ -582,7 +585,7 @@ function gelegt(spieler_gelegt) {
 }
 
 // Spiel in Storage eintragen
-function spielEintragenStorage() {
+export function spielEintragenStorage() {
   if (gewinn > 0) {
     // Wenn Solo Ausgewählt ist und als Gewinner markiert
     if (
@@ -659,12 +662,11 @@ document
       return `${spieler1}: ${spieler1GesamtGewinn}, 
       ${spieler2}: ${spieler2GesamtGewinn}, 
       ${spieler3}: ${spieler3GesamtGewinn}, 
-      ${spieler4}: ${spieler4GesamtGewinn} ///////////// -->
-      ${JSON.stringify(localStorage)}`
+      ${spieler4}: ${spieler4GesamtGewinn}`
     }
   })
 
-function letztesSpielLöschen() {
+export function letztesSpielLöschen() {
   localStorage.removeItem(localStorage.length)
 }
 
@@ -675,7 +677,7 @@ document
       localStorage.clear()
     }
     alleSpieleLöschen()
-    location.reload()
+    window.location.reload()
   })
 
 function spieleListeErstellen() {
@@ -1160,46 +1162,10 @@ function spieleListeErstellen() {
     </tr>
     `
     }
-    /*     for (var i = 0; i < localStorage.length; i++) {
-      // set iteration key name
-      var key = localStorage.key(i);
-
-      trSpiel = document.createElement("tr");
-      tdSpieler = document.createElement("td");
-
-      tdKey = tdSpieler.appendChild(document.createTextNode(key));
-
-      tdSpieler1 = tdSpieler.appendChild(
-        document.createTextNode(JSON.parse(localStorage.getItem(key)).spieler1)
-      );
-
-      tdSpieler2 = tdSpieler.appendChild(
-        document.createTextNode(JSON.parse(localStorage.getItem(key)).spieler2)
-      );
-
-      tdSpieler3 = tdSpieler.appendChild(
-        document.createTextNode(JSON.parse(localStorage.getItem(key)).spieler3)
-      );
-
-      tdSpieler4 = tdSpieler.appendChild(
-        document.createTextNode(JSON.parse(localStorage.getItem(key)).spieler4)
-      );
-
-      trSpiel.appendChild(tdKey);
-
-      trSpiel.appendChild(tdSpieler1);
-
-      trSpiel.appendChild(tdSpieler2);
-
-      trSpiel.appendChild(tdSpieler3);
-
-      trSpiel.appendChild(tdSpieler4);
-
-      document.getElementById("spiele-liste").appendChild(trSpiel); */
   } else return ""
 }
 
-function mussMischen() {
+export function mussMischen() {
   if (
     localStorage.length === 0 ||
     localStorage.length === 4 ||
@@ -1463,3 +1429,55 @@ function mussMischen() {
     document.getElementById("spieler3-mischen").src = ""; */
   }
 }
+
+// dragula([document.querySelector("#drag-container")])
+export function spielEintragenAktualisieren() {
+  document.getElementById("spielEintragen").innerHTML = gesamtGewinn()
+}
+
+/*     let localStorageTest = JSON.parse(localStorage.getItem("1"))
+    let spieler1GesamtGewinn = {...localStorage}
+    console.log(spieler1GesamtGewinn)
+    document.getElementById("spieler1-betrag").innerHTML = localStorageTest.spieler1; */
+// iterate localStorage
+
+spieleListeErstellen()
+
+mussMischen()
+
+// Letztes Spiel Unter Spielernamen anzeigen
+document.getElementsByClassName("recipe-ingredients")[0].innerHTML = JSON.parse(
+  localStorage.getItem(localStorage.length)
+).spieler1
+document.getElementsByClassName("recipe-ingredients")[1].innerHTML = JSON.parse(
+  localStorage.getItem(localStorage.length)
+).spieler2
+document.getElementsByClassName("recipe-ingredients")[2].innerHTML = JSON.parse(
+  localStorage.getItem(localStorage.length)
+).spieler3
+document.getElementsByClassName("recipe-ingredients")[3].innerHTML = JSON.parse(
+  localStorage.getItem(localStorage.length)
+).spieler4
+
+export function preload() {
+  let preloadImageWolf = new Image()
+  let preloadImageSheep = new Image()
+
+  preloadImageWolf.src = "img/w.png"
+  preloadImageSheep.src = "img/s.png"
+}
+
+let toastHTML = `<div class='valign-wrapper'><i class='material-icons'>info_outline</i>&ensp;Es wurden bereits ${localStorage.length} Spiele gespielt!</div>`
+if (
+  localStorage.length === 20 ||
+  localStorage.length === 40 ||
+  localStorage.length === 60 ||
+  localStorage.length === 80 ||
+  localStorage.length === 100 ||
+  localStorage.length === 120 ||
+  localStorage.length === 140 ||
+  localStorage.length === 160 ||
+  localStorage.length === 180 ||
+  localStorage.length === 200
+)
+  M.toast({ html: toastHTML, displayLength: 5000 })
